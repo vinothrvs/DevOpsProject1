@@ -1,0 +1,15 @@
+---
+- name: Deploy Docker Container
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Stop old container if running
+      command: docker stop my-app
+      ignore_errors: yes
+
+    - name: Remove old container
+      command: docker rm my-app
+      ignore_errors: yes
+
+    - name: Run new Docker container
+      command: docker run -d --name my-app -p 8080:8080 devops-demo-app
